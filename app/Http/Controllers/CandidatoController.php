@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidato;
+use App\Models\NivelAcademico;
 use Illuminate\Http\Request;
 
 class CandidatoController extends Controller
@@ -14,7 +15,8 @@ class CandidatoController extends Controller
      */
     public function index()
     {
-        //
+        $candidatos = Candidato::all();
+        return view("candidatos.index", compact("candidatos"));
     }
 
     /**
@@ -24,7 +26,8 @@ class CandidatoController extends Controller
      */
     public function create()
     {
-        //
+        $niveis = NivelAcademico::all();
+        return view("candidatos.create")->with("niveis", $niveis);
     }
 
     /**
@@ -35,7 +38,17 @@ class CandidatoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            "nome" => "required",
+            "nivel" => "required",
+            "experiencia" => "required"
+        ]);
+        Candidato::create([
+            "nome" => $data["nome"],
+            "nivel_academico_id" => $data["nivel"],
+            "experiencia" => $data["experiencia"],
+        ]);
+        return redirect()->action([CandidatoController::class, "index"]);
     }
 
     /**
@@ -57,7 +70,8 @@ class CandidatoController extends Controller
      */
     public function edit(Candidato $candidato)
     {
-        //
+        $niveis = NivelAcademico::all();
+        return view("candidatos.edit", compact("candidato", "niveis"));
     }
 
     /**
@@ -69,7 +83,16 @@ class CandidatoController extends Controller
      */
     public function update(Request $request, Candidato $candidato)
     {
-        //
+        $data = $request->validate([
+            "nome" => "required",
+            "nivel" => "required",
+            "experiencia" => "required"
+        ]);
+        $candidato->nome = $data["nome"];
+        $candidato->experiencia = $data["experiencia"];
+        $candidato->nivel_academico_id = $data["nivel"];
+        $candidato->save();
+        return redirect()->action([CandidatoController::class, "index"]);
     }
 
     /**
