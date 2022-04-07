@@ -13,8 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::create('nivel_academicos', function (Blueprint $table) {
+            $table->id();
+            $table->string("nome");
+            $table->timestamps();
+        });
+
         Schema::create('candidatos', function (Blueprint $table) {
             $table->id();
+            $table->string("nome");
+            $table->string("experiencia");
+            $table->foreignId("nivel_academico_id")->constrained()->onDelete("cascade");
             $table->timestamps();
         });
     }
@@ -27,5 +36,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('candidatos');
+        Schema::dropIfExists('nivel_academicos');
     }
 };
