@@ -2,11 +2,12 @@
 @section('content')
     @if (count($candidatos) > 0)
         <div class="space-y-4 mt-10">
-            <h1 class="text-center font-bold text-2xl uppercase">Candidatos</h1>
-            <h1 class="text-right"><a class="px-4 text-white bg-green-500 py-2 shadow-lg rounded-lg"
+            <h1 class="text-center font-bold text-2xl uppercase animate-slideInFromTop">Candidatos</h1>
+            <h1 class="text-right"><a class="px-4 text-white
+                bg-green-500 py-2 shadow-lg rounded-lg"
                     href="{{ route('candidatos.create') }}">Novo
                     Candidato</a></h1>
-            <table class="min-w-full border shadow-md">
+            <table class="min-w-full border shadow-md animate-slideInFromLeft">
                 <thead class="bg-slate-900 text-white">
                     <tr class=" px-4">
                         <th class="px-6 py-3 text-left uppercase text-sm leading-4 font-medium">ID</th>
