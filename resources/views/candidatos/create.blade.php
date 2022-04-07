@@ -2,7 +2,7 @@
 @section('content')
     <h1 class="text-2xl text-center mt-10">Novo candidato</h1>
     <form action="{{ route('candidatos.store') }}" method="POST"
-        class="max-w-lg mx-auto my-10 p-6
+        class="max-w-lg mx-auto my-10 p-6 animate-slideInFromBottom
     w-full bg-gray-800 rounded-lg shadow-lg">
         @csrf
         <div class="mb-5 flex flex-col space-y-3">
