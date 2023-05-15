@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Resultado;
 use App\Models\Tema;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    public static function isAvaliado($estudante_id, $docente_id)
+    {
+        return Resultado::where('estudante_id', $estudante_id)
+            ->where('docente_id', $docente_id)->count();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,19 +23,43 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        if($user->hasRole("estudante")) {
-            $temas = Tema::all();
-            return view("user_types.estudante", compact("temas"));
-        }
-        elseif($user->hasRole("catedratico") 
-        || $user->hasRole("associado")
-        || $user->hasRole("auxiliar")
-        || $user->hasRole("assistente")
-        ) {
-           // $temas = $user->temas;
-           $temas = Tema::where("user_id", $user->id)->paginate(5);
-            return view("user_types.docente")->with("temas", $temas);
+        if (auth()->user()->hasRole('estudante')) {
+            $docentes = User::whereHas('roles', function ($q) {
+                $q->where('name', 'professor');
+            })->get();
+            // if(auth()->user()->){}
+            //dd($users);
+            return view('user_types.estudante', compact('docentes'));
+        } elseif (auth()->user()->hasRole('professor')) {
+            return view('user_types.docente');
+        } elseif (auth()->user()->hasRole('admin')) {
+            //$users = User::with('roles')->get();
+            /*  $docentes = User::whereHas('roles', function ($q) {
+                $q->where('name', 'professor');
+            })->join('resultados', 'users.id', '=', 'resultados.docente_id')->avg('pontuacao'); */
+            //$va = $docentes->join('resultados', 'users.id', '=', 'resultados.id_docente')->get();
+            $docentes = User::select(
+                'users.name',
+                'users.email',
+                'users.id',
+                DB::raw('avg(resultados.pontuacao) as media')
+            )
+                ->whereHas('roles', function ($q) {
+                    $q->where('name', 'professor');
+                })
+                ->join('resultados', 'users.id', '=', 'resultados.docente_id')
+                ->groupBy('users.id')
+                ->orderBy('media', 'DESC')
+                ->get();
+
+            //dd($docentes);
+            //$pontuacao = 0;
+            /* foreach ($docentes as $docente) {
+                $pontuacao = Resultado::where('docente_id', $docente->id)->get();
+                dd($pontuacao->pontuacao);
+            } */
+            //dd($pontuacao);
+            return view('dashboard', compact('docentes'));
         }
     }
 
@@ -60,7 +92,6 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-       
     }
 
     /**

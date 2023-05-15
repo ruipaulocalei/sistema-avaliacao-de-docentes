@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\CandidatoController;
+use App\Http\Controllers\AvaliacaoController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TemaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +21,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resources([
-    'candidatos' => CandidatoController::class,
-]);
+Route::group(["middleware" => ["auth"]], function () {
+    Route::get("/dashboard", [DashboardController::class, "index"])->name('dashboard');
+    Route::get("/avaliar/{id}", [AvaliacaoController::class, "index"])->name('avaliar.index');
+    Route::post("/avaliar/{id}", [AvaliacaoController::class, "avaliar"])->name('avaliar.post');
+    Route::resource("/tema", TemaController::class);
+    Route::resource("/orders", OrderController::class);
+    Route::get("/orders/{order}/aceito", [OrderController::class, "aceito"]);
+    Route::get('/downloadPDF/{id}', [OrderController::class, "downloadPDF"]);
+    // Route::get('/gerarpdf', [OrderController::class, "gerarpdf"]);
+});
+/* Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard'); */
+
+require __DIR__ . '/auth.php';

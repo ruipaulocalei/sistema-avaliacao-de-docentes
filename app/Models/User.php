@@ -44,7 +44,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function temas() {
-        return $this->hasMany(Tema::class);
-    }
+    /**
+     * Get the user associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+
+    /**
+     * Get all of the orders for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+
+     /**
+      * Get all of the Resultado for the User
+      *
+      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+      */
+     public function resultadoDocente()
+     {
+         return $this->hasMany(Resultado::class, 'docente_id', 'id');
+     }
 }
