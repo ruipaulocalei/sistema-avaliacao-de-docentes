@@ -31,7 +31,9 @@ class DashboardController extends Controller
             //dd($users);
             return view('user_types.estudante', compact('docentes'));
         } elseif (auth()->user()->hasRole('professor')) {
-            return view('user_types.docente');
+            $pontuacao = Resultado::where('docente_id', auth()->user()->id)->avg('pontuacao');
+            //dd(round($pontuacao));
+            return view('user_types.docente', compact('pontuacao'));
         } elseif (auth()->user()->hasRole('admin')) {
             //$users = User::with('roles')->get();
             /*  $docentes = User::whereHas('roles', function ($q) {
