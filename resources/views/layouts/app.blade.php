@@ -38,6 +38,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('script')
     @livewireScripts
+    @stack('scripts')
 </body>
 <footer class="mt-10 text-center p-5 text-gray-800 font-bold uppercase">
     Avaliador IPH - Todos direitos reservados

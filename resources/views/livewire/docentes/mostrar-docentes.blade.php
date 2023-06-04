@@ -33,8 +33,35 @@
     @else
         <h1>Sem nenhum Docente por enquanto!</h1>
     @endif
+
+    @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Livewire.on('mostrarAlerta', docenteId => {
+            Swal.fire({
+                title: 'Tens a certeza que queres eliminar?',
+                text: "Uma vez excluído não se pode reverter!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, eliminá-lo!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('eliminarDocente', docenteId)
+                    Swal.fire(
+                        'Excluído!',
+                        'Teu produto foi excluído.',
+                        'success'
+                    )
+                }
+            })
+        })
+    </script>
+@endpush
 </div>
 
 <div class="text-center max-w-xl">
     {{$docentes->links()}}
 </div>
+
