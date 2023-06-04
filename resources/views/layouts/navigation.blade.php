@@ -16,6 +16,18 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                @if (Auth::user()->hasRole('admin'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('docentes.index')" :active="request()->routeIs('docentes.index')">
+                            {{ __('Docentes') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
+                            {{ __('Estudantes') }}
+                        </x-nav-link>
+                    </div>
+                @endif
                 @if (Auth::user()->hasRole('estudante'))
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
