@@ -30,7 +30,7 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::resource("/orders", OrderController::class);
     Route::get("/admin/docentes", [DocenteController::class, 'index'])->name('docentes.index');
     Route::get("/admin/docentes/create", [DocenteController::class, 'create'])->name('docentes.create');
-    Route::get("/admin/docentes/{id}/edit", [DocenteController::class, 'edit'])->name('docentes.edit');
+    Route::get("/admin/docentes/{user}/edit", [DocenteController::class, 'edit'])->name('docentes.edit');
     Route::get("/orders/{order}/aceito", [OrderController::class, "aceito"]);
     Route::get('/downloadPDF/{id}', [OrderController::class, "downloadPDF"]);
     // Route::get('/gerarpdf', [OrderController::class, "gerarpdf"]);
