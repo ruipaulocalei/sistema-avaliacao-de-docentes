@@ -23,6 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'numero_sigu',
+        'departamento_id',
+        'imagem',
     ];
 
     /**
@@ -56,13 +59,23 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
-     /**
-      * Get all of the Resultado for the User
-      *
-      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-      */
-     public function resultadoDocente()
-     {
-         return $this->hasMany(Resultado::class, 'docente_id', 'id');
-     }
+    /**
+     * Get all of the Resultado for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function resultadoDocente()
+    {
+        return $this->hasMany(Resultado::class, 'docente_id', 'id');
+    }
+
+    /**
+     * Get the docente that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class);
+    }
 }

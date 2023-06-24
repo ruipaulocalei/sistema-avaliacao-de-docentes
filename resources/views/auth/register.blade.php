@@ -9,7 +9,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}" class="texxt-white">
+        <form method="POST" action="{{ route('register') }}" class="texxt-white" novalidate>
             @csrf
 
             <!-- Name -->
@@ -24,6 +24,14 @@
                 <x-label class="text-white" for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            </div>
+
+            <!-- Numero SIGU -->
+            <div class="mt-4">
+                <x-label class="text-white" for="numero_sigu" :value="__('Número do SIGU')" />
+
+                <x-input id="numero_sigu" class="block mt-1 w-full"
+                type="text" name="numero_sigu" :value="old('numero_sigu')" required />
             </div>
 
             <!-- Password -->

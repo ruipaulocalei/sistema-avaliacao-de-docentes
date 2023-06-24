@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Questões') }}
+            {{ __('Departamentos') }}
         </h2>
     </x-slot>
 
@@ -16,9 +16,9 @@
                 <h4></h4>
                 <a class="bg-green-600 py-2 px-3 uppercase
                 rounded-lg text-white text-xs font-bold"
-                    href="{{ route('questoes.create') }}">Criar Questão</a>
+                    href="{{ route('departamentos.create') }}">Criar Depaartamento</a>
             </div>
-            <livewire:questoes.mostrar-questoes />
+            <livewire:departamentos.mostrar-departamentos />
         </div>
     </div>
 

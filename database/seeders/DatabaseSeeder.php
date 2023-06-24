@@ -17,11 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            //NivelAcademicoSeed::class,
             LaratrustSeeder::class,
             AdminSeeder::class,
-            AvaliacaoSeeder::class,
-            DocenteSeeder::class,
         ]);
     }
 }

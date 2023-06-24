@@ -17,24 +17,7 @@
                                 <h4>{{ $docente->name }} - </h4>
                                 <h5>Média:
                                     <span class="font-bold">{{ round($docente->media) }} Pontos -
-                                        @php
-                                            $media = round($docente->media);
-                                            $mensagem = '';
-                                            if ($media >= 0 && $media <= 7) {
-                                                $mensagem = 'Mau';
-                                            } elseif ($media >= 8 && $media <= 9) {
-                                                $mensagem = 'Medíocre';
-                                            } elseif ($media >= 10 && $media <= 12) {
-                                                $mensagem = 'Suficiente';
-                                            } elseif ($media >= 13 && $media <= 15) {
-                                                $mensagem = 'Bom';
-                                            } elseif ($media >= 16 && $media <= 17) {
-                                                $mensagem = 'Muito Bom';
-                                            } elseif ($media >= 18 && $media <= 20) {
-                                                $mensagem = 'Excelente';
-                                            }
-                                        @endphp
-                                        {{ $mensagem }}
+                                       +
                                     </span>
                                 </h5>
                             </div>

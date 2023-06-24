@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EstudanteController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\QuestoesController;
 use App\Http\Controllers\TemaController;
+use App\Models\Departamento;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +30,7 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::get("/dashboard", [DashboardController::class, "index"])->name('dashboard');
     Route::get("/avaliar/{id}", [AvaliacaoController::class, "index"])->name('avaliar.index');
     Route::post("/avaliar/{id}", [AvaliacaoController::class, "avaliar"])->name('avaliar.post');
-    Route::resource("/tema", TemaController::class);
-    Route::resource("/orders", OrderController::class);
+    Route::resource("/admin/departamentos", DepartamentoController::class);
     Route::get("/admin/docentes", [DocenteController::class, 'index'])->name('docentes.index');
     Route::get("/admin/docentes/create", [DocenteController::class, 'create'])->name('docentes.create');
     Route::get("/admin/docentes/{user}/edit", [DocenteController::class, 'edit'])->name('docentes.edit');
@@ -41,8 +42,6 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::get("/admin/questoes", [QuestoesController::class, 'index'])->name('questoes.index');
     Route::get("/admin/questoes/{avaliacao}/edit", [QuestoesController::class, 'edit'])->name('questoes.edit');
     Route::get("/admin/questoes/create", [QuestoesController::class, 'create'])->name('questoes.create');
-    Route::get("/orders/{order}/aceito", [OrderController::class, "aceito"]);
-    Route::get('/downloadPDF/{id}', [OrderController::class, "downloadPDF"]);
     // Route::get('/gerarpdf', [OrderController::class, "gerarpdf"]);
 });
 /* Route::get('/dashboard', function () {

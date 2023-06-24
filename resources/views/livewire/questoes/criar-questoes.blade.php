@@ -1,4 +1,6 @@
-<form class="w-full space-y-4 mx-auto" wire:submit.prevent="criarQuestao">
+<div class="flex flex-col justify-center items-center w-full mx-auto ml-auto">
+    <form class="w-full space-y-4 mx-auto"
+ wire:submit.prevent="criarQuestao">
     {{-- Because she competes with no one, no one can compete with her. --}}
     <input type="hidden" wire:model="resposta1" value="{{ old('resposta1') }}"/>
     <input type="hidden" wire:model="resposta2" value="{{ old('resposta2') }}" />
@@ -17,3 +19,5 @@
             Questão</button>
     </div>
 </form>
+
+</div>

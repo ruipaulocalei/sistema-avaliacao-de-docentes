@@ -25,6 +25,10 @@ return [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
+        'chefe_departamento' => [
+            'users' => 'c,r,u,d',
+            'profile' => 'r,u'
+        ],
        /*  'user' => [
             'profile' => 'r,u',
         ],

@@ -8,9 +8,7 @@
     <div class="mx-auto py-12">
         <div class="flex w-full justify-center p-5 bg-white
         shadow-md rounded-md">
-            <livewire:questoes.criar-questoes />
-            <div class="">
-            </div>
+            <livewire:departamentos.criar-departamentos />
         </div>
     </div>
 
