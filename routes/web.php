@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AvaliacaoController;
+use App\Http\Controllers\ChefeDepartamentoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\DocenteController;
@@ -31,6 +32,7 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::get("/avaliar/{id}", [AvaliacaoController::class, "index"])->name('avaliar.index');
     Route::post("/avaliar/{id}", [AvaliacaoController::class, "avaliar"])->name('avaliar.post');
     Route::resource("/admin/departamentos", DepartamentoController::class);
+    Route::resource("/admin/chefe_departamentos", ChefeDepartamentoController::class);
     Route::get("/admin/docentes", [DocenteController::class, 'index'])->name('docentes.index');
     Route::get("/admin/docentes/create", [DocenteController::class, 'create'])->name('docentes.create');
     Route::get("/admin/docentes/{user}/edit", [DocenteController::class, 'edit'])->name('docentes.edit');

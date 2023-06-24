@@ -37,13 +37,18 @@
                         rounded-md p-2 my-3 space-y-2">
                                         <div class="">
                                             <h6
-                                                class="h-24 w-24 mx-auto flex flex-col items-center
+                                                class="h-28 w-28 mx-auto flex flex-col items-center
                                             rounded-full bg-white justify-center
                                             font-bold text-blue-600 text-5xl tracking-wider">
-                                                {{ $avatar }}</h6>
+                                            <img class="w-28 h-28 rounded-full"
+                                            src="{{ asset('storage/docentes/' . $docente->imagem) }}"
+                                    alt="">
+                                                {{-- {{ $avatar }} --}}
+                                            </h6>
                                             <div>
                                                 <h4 class="font-bold text-xl">{{ $docente->name }}</h4>
                                                 <h5 class="font-semibold">{{ $docente->email }}</h5>
+                                                <h5 class="font-semibold">Departamento: <span class="font-bold">{{ $docente->departamento->nome }}</span></h5>
                                             </div>
 
                                         </div>

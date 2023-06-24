@@ -58,8 +58,10 @@
                               dark:text-white dark:hover:bg-gray-700">Docentes</a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-900 dark:text-white dark:hover:bg-gray-700">Invoice</a>
+                        <a href="{{ route('chefe_departamentos.index') }}"
+                            class="flex items-center w-full p-2 text-white transition
+                             duration-75 rounded-lg pl-11 group hover:bg-gray-900
+                              dark:text-white dark:hover:bg-gray-700">Chefe de Departamentos</a>
                     </li>
                 </ul>
             </li>
@@ -105,7 +107,7 @@
     </div>
 </aside>
 
-<div class="px-3 sm:ml-64">
+<div class="px-3 sm:ml-64 mb-8">
     <div class="border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
         @include('layouts.navigation')
         <!-- Page Heading -->

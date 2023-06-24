@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Departamentos') }}
+            {{ __('Chefe de Departamentos') }}
         </h2>
     </x-slot>
 
@@ -16,9 +16,9 @@
                 <h4></h4>
                 <a class="bg-green-600 py-2 px-3 uppercase
                 rounded-lg text-white text-xs font-bold"
-                    href="{{ route('departamentos.create') }}">Criar Departamento</a>
+                    href="{{ route('chefe_departamentos.create') }}">Criar Chefe de Departamento</a>
             </div>
-            <livewire:departamentos.mostrar-departamentos />
+            <livewire:chefe-departamentos.mostrar-chefe-departamentos />
         </div>
     </div>
 
