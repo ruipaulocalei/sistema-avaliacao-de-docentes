@@ -78,7 +78,7 @@
                 confirmButtonText: 'Sim, eliminá-lo!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.emit('eliminarChefeDepartamentoId', chefeDepartamentoId)
+                    Livewire.emit('eliminarChefeDepartamento', chefeDepartamentoId)
                     Swal.fire(
                         'Excluído!',
                         'O Chefe de departamento foi excluído.',

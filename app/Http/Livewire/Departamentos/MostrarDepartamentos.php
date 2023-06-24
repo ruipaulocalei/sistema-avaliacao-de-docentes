@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 class MostrarDepartamentos extends Component
 {
     use WithPagination;
-    public $listeners = ['eliminarDepartamento'];
+    public $listeners = ['eliminarChefeDepartamento'];
     public function render()
     {
         $departamentos = Departamento::paginate(10);
@@ -20,7 +20,7 @@ class MostrarDepartamentos extends Component
         ]);
     }
 
-    public function eliminarDepartamento(Departamento $departamento)
+    public function eliminarChefeDepartamento(Departamento $departamento)
     {
         try {
             DB::beginTransaction();
