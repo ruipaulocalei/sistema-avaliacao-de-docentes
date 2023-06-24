@@ -57,7 +57,9 @@ class DepartamentoController extends Controller
      */
     public function edit(Departamento $departamento)
     {
-        //
+        return view('user_types.departamentos.edit', [
+            'departamento' => $departamento
+        ]);
     }
 
     /**

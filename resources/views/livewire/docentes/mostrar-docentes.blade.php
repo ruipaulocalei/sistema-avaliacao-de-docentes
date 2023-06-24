@@ -1,7 +1,8 @@
-<div class="overflow-hidden mx-auto flex justify-center">
+<div class="overflow-hidden container">
     {{-- Do your work, then step back. --}}
     @if (count($docentes) > 0)
-        <div class="overflow-hidden overflow-x-auto mb-4 min-w-full align-middle sm:rounded-md">
+        <div class="overflow-hidden overflow-x-auto mb-4 min-w-full
+        align-middle sm:rounded-md mx-auto flex justify-center">
             <table>
                 <thead class="bg-blue-500 text-white">
                     <tr class="border border-black px-4 space-x-4">

@@ -1,4 +1,4 @@
-<form class="w-full space-y-4 mx-auto" wire:submit.prevent="editarDocente">
+<form class="w-full space-y-4" wire:submit.prevent="editarDocente">
     {{-- Because she competes with no one, no one can compete with her. --}}
     <div>
         <label for="nome">Nome do docente</label>
