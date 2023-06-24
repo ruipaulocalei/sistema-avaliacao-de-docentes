@@ -1333,6 +1333,12 @@ input:checked + .toggle-bg {
 .h-8 {
   height: 2rem;
 }
+.h-28 {
+  height: 7rem;
+}
+.h-36 {
+  height: 9rem;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1383,6 +1389,15 @@ input:checked + .toggle-bg {
 }
 .w-1\/2 {
   width: 50%;
+}
+.w-28 {
+  width: 7rem;
+}
+.w-3 {
+  width: 0.75rem;
+}
+.w-36 {
+  width: 9rem;
 }
 .min-w-full {
   min-width: 100%;

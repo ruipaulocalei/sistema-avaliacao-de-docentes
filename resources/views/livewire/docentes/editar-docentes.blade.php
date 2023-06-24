@@ -17,26 +17,40 @@
     </div>
 
     <div>
+        <label for="departamento">Departamento</label>
+        <select wire:model="departamento" value="{{ old('departamento') }}" id="departamento"
+            class="block w-2/5 rounded-md p-3
+        mt-1 border border-gray-200
+        focus:outline-none">
+            @foreach ($departamentos as $departamento)
+                <option value="{{ $departamento->id }}">{{ $departamento->nome }}</option>
+            @endforeach
+        </select>
+
+        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    </div>
+
+    <div>
         <label for="Imagem">Foto de Perfil</label>
-        <input type="file" class="block w-full rounded-md p-3
-        mt-1 border border-gray-200 focus:outline-none"
+        <input type="file" class="block w-2/5 rounded-md p-3
+        mt-1 border border-gray-200
+        focus:outline-none"
             wire:model="imagem_nova" accept="image/*" value="{{ old('imagem') }}" />
         {{--  --}}
 
         <div class="my-5">
-            <img src="{{ asset('storage/docentes/' . $imagem) }}" />
+            <img class="w-36 h-36"
+            src="{{ asset('storage/docentes/' . $imagem) }}" />
         </div>
 
         <div class="my-5">
             @if ($imagem_nova)
                 Imagem Nova
-                <img src="{{ $imagem_nova->temporaryUrl() }}" />
+                <img class="w-36 h-36"
+                 src="{{ $imagem_nova->temporaryUrl() }}" />
             @endif
         </div>
-        @error('imagem_nova')
-            <h1>Erro</h1>
-            {{-- <livewire:mostrar-alerta :message="$message" /> --}}
-        @enderror
+        <x-input-error :messages="$errors->get('imagem_nova')" class="mt-2" />
     </div>
 
     <div class="flex">

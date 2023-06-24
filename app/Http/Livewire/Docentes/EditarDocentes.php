@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Docentes;
 use App\Models\Departamento;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -27,7 +28,7 @@ class EditarDocentes extends Component
                 'max:255', 'unique:users,email,' . $this->user_id
             ],
             'departamento' => ['required'],
-            'imagem_nova' => ['nullable|image'],
+            'imagem_nova' => 'nullable|image',
         ];
     }
     public function render()
@@ -53,8 +54,15 @@ class EditarDocentes extends Component
         try {
             DB::beginTransaction();
             $user = User::lockForUpdate()->find($this->user_id);
+            if ($this->imagem_nova) {
+                $imagem = $this->imagem_nova->store('public/docentes');
+                $request['imagem'] = str_replace('public/docentes/', '', $imagem);
+                Storage::delete('public/docentes/' . $user->imagem);
+            }
             $user->name = $request['nome'];
             $user->email = $request['email'];
+            $user->departamento_id = $request['departamento'];
+            $user->imagem = $request['imagem'] ?? $user->imagem;
             $user->save();
             DB::commit();
             session()->flash('message', 'Docente actualizado');
