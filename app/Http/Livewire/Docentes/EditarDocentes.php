@@ -2,15 +2,21 @@
 
 namespace App\Http\Livewire\Docentes;
 
+use App\Models\Departamento;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class EditarDocentes extends Component
 {
     public $user_id;
     public $nome;
     public $email;
+    public $imagem;
+    public $imagem_nova;
+    public $departamento;
+    use WithFileUploads;
 
     protected function rules()
     {
@@ -20,11 +26,16 @@ class EditarDocentes extends Component
                 'required', 'string', 'email',
                 'max:255', 'unique:users,email,' . $this->user_id
             ],
+            'departamento' => ['required'],
+            'imagem_nova' => ['nullable|image'],
         ];
     }
     public function render()
     {
-        return view('livewire.docentes.editar-docentes');
+        $departamentos = Departamento::all();
+        return view('livewire.docentes.editar-docentes', [
+            'departamentos' => $departamentos
+        ]);
     }
 
     public function mount(User $user)
@@ -32,6 +43,8 @@ class EditarDocentes extends Component
         $this->user_id = $user->id;
         $this->nome = $user->name;
         $this->email = $user->email;
+        $this->imagem = $user->imagem;
+        $this->departamento = $user->departamento_id;
     }
 
     public function editarDocente()

@@ -27,12 +27,12 @@
             </div>
 
             <!-- Numero SIGU -->
-            <div class="mt-4">
+            {{-- <div class="mt-4">
                 <x-label class="text-white" for="numero_sigu" :value="__('Número do SIGU')" />
 
                 <x-input id="numero_sigu" class="block mt-1 w-full"
                 type="text" name="numero_sigu" :value="old('numero_sigu')" required />
-            </div>
+            </div> --}}
 
             <!-- Password -->
             <div class="mt-4">

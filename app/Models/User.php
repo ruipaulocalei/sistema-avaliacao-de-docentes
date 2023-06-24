@@ -28,6 +28,19 @@ class User extends Authenticatable
         'imagem',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->numero_sigu = date('Y') . str_pad(static::count() + 1, 6, '0', STR_PAD_LEFT);
+        });
+
+        static::saving(function ($model) {
+            if (!$model->exists) {
+                $model->numero_sigu = date('Y') . substr($model->numero_sigu, 4);
+            }
+        });
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
