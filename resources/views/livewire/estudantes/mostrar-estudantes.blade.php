@@ -8,6 +8,8 @@
                  px-5 uppercase">Nome</th>
                     <th class="border-l border-black
                  px-5 uppercase">E-mail</th>
+                 <th class="border-l border-black
+                     px-5 uppercase">Nº do SIGU</th>
                     <th class="border-l border-black
                  px-5 uppercase">Opções</th>
                 </tr>
@@ -16,6 +18,9 @@
                     <tr class="text-left border border-black">
                         <td class="border-l border-black px-4">{{ $estudante->name }}</td>
                         <td class="border-l border-black px-4">{{ $estudante->email }}</td>
+                        <td class="border-l border-black px-4">
+                            {{ $estudante->numero_sigu }}
+                        </td>
                         <td class="border-l border-black
                         px-4 py-2 space-x-2">
                            {{--  <a class="bg-blue-800 py-2 px-3 uppercase

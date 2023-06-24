@@ -14,6 +14,8 @@
                         <th class="border-l border-black
                      px-5 uppercase">Departamento</th>
                         <th class="border-l border-black
+                     px-5 uppercase">Nº do SIGU</th>
+                        <th class="border-l border-black
                      px-5 uppercase">Opções</th>
                     </tr>
                 <tbody>
@@ -29,6 +31,9 @@
                             </td>
                             <td class="border-l border-black px-4">
                                 {{ $docente->departamento->nome }}
+                            </td>
+                            <td class="border-l border-black px-4">
+                                {{ $docente->numero_sigu }}
                             </td>
                             <td class="border-l border-black
                              py-2 space-y-2 block md:px-3">
