@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LaratrustSeeder::class,
             AdminSeeder::class,
+            AvaliacaoSeeder::class,
         ]);
     }
 }

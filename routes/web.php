@@ -29,8 +29,8 @@ Route::get('/', function () {
 
 Route::group(["middleware" => ["auth"]], function () {
     Route::get("/dashboard", [DashboardController::class, "index"])->name('dashboard');
-    Route::get("/avaliar/{id}", [AvaliacaoController::class, "index"])->name('avaliar.index');
-    Route::post("/avaliar/{id}", [AvaliacaoController::class, "avaliar"])->name('avaliar.post');
+    Route::get("/admin/avaliar/{id}", [AvaliacaoController::class, "index"])->name('avaliar.index');
+    Route::post("/admin/avaliar/{id}", [AvaliacaoController::class, "avaliar"])->name('avaliar.post');
     Route::resource("/admin/departamentos", DepartamentoController::class);
     Route::resource("/admin/chefe_departamentos", ChefeDepartamentoController::class);
     Route::get("/admin/docentes", [DocenteController::class, 'index'])->name('docentes.index');

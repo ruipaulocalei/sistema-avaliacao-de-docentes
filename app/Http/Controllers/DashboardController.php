@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChefeDepartamento;
 use App\Models\Resultado;
 use App\Models\Tema;
 use App\Models\User;
@@ -32,8 +33,12 @@ class DashboardController extends Controller
             return view('user_types.estudante', compact('docentes'));
         } elseif (auth()->user()->hasRole('professor')) {
             $pontuacao = Resultado::where('docente_id', auth()->user()->id)->avg('pontuacao');
+            $chefeDepartamento = ChefeDepartamento::where('docente_id', auth()->user()->id)->first();
+            $usersDepartamento = User::where('departamento_id',
+            $chefeDepartamento->departamento_id)->where('id','!=',
+            $chefeDepartamento->docente_id)->get();
             //dd(round($pontuacao));
-            return view('user_types.docente', compact('pontuacao'));
+            return view('user_types.docente', compact('pontuacao','chefeDepartamento','usersDepartamento'));
         } elseif (auth()->user()->hasRole('admin')) {
             //$users = User::with('roles')->get();
             /*  $docentes = User::whereHas('roles', function ($q) {

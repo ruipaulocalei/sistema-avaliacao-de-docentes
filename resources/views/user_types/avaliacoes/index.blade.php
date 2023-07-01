@@ -14,7 +14,7 @@
                             <div
                                 class="bg-slate-300 shadow-md
                         rounded-md hover:cursor-pointer p-2 my-3 space-y-2">
-                                <div class="">
+                                {{-- <div class="">
                                     @php
                                         $avatar = '';
                                         $divide = explode(' ', $user->name);
@@ -35,39 +35,55 @@
                                         <h5 class="font-semibold">{{ $user->email }}</h5>
                                     </div>
 
+                                </div> --}}
+                                <h6
+                                    class="h-28 w-28 mx-auto flex flex-col items-center
+                                                rounded-full bg-white justify-center
+                                                font-bold text-blue-600 text-5xl tracking-wider">
+                                    <img class="w-28 h-28 rounded-full"
+                                        src="{{ asset('storage/docentes/' . $user->imagem) }}" alt="">
+                                    {{-- {{ $avatar }} --}}
+                                </h6>
+                                <div>
+                                    <h4 class="font-bold text-xl">{{ $user->name }}</h4>
+                                    <h5 class="font-semibold">{{ $user->email }}</h5>
+                                    <h5 class="font-semibold">Departamento: <span
+                                            class="font-bold">{{ $user->departamento->nome }}</span></h5>
                                 </div>
-                                {{-- <p
+
+                            </div>
+                            {{-- <p
                                     class="bg-blue-600 text-center
                                 text-white px-3 rounded-md w-full">
                                     <a href="#">Avaliar</a>
                                 </p> --}}
-                            </div>
                         </div>
-
-                        <form action="{{ "/avaliar/$user->id" }}" class="space-y-4" method="POST">
-                            @csrf
-                            <input type="hidden" name="docente_id" value="{{ $user->id }}">
-                            @foreach ($questoes as $questao)
-                                <fieldset id="{{ $questao->id }}">
-                                    <h4 class="font-semibold">{{ $questao->pergunta }}</h4>
-                                    <div>
-                                        <input type="radio" name="{{ $questao->id }}" value="Sim" />
-                                        <label for="">{{ $questao->resposta1 }}</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="{{ $questao->id }}" value="Não" />
-                                        <label for="">{{ $questao->resposta2 }}</label>
-                                    </div>
-                                </fieldset>
-                            @endforeach
-                            <button
-                                class="px-8 py-2 bg-cyan-600 rounded-md shadow-md
-                             text-white"
-                                type="submit">Avaliar</button>
-                        </form>
-                    </article>
                 </div>
+
+                <form action="{{ "/avaliar/$user->id" }}"
+                    class="space-y-4 px-6 pb-3" method="POST">
+                    @csrf
+                    <input type="hidden" name="docente_id" value="{{ $user->id }}">
+                    @foreach ($questoes as $questao)
+                        <fieldset id="{{ $questao->id }}">
+                            <h4 class="font-semibold">{{ $questao->pergunta }}</h4>
+                            <div>
+                                <input type="radio" name="{{ $questao->id }}" value="Sim" />
+                                <label for="">{{ $questao->resposta1 }}</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="{{ $questao->id }}" value="Não" />
+                                <label for="">{{ $questao->resposta2 }}</label>
+                            </div>
+                        </fieldset>
+                    @endforeach
+                    <button class="px-8 py-2 bg-cyan-600 rounded-md shadow-md
+                             text-white"
+                        type="submit">Avaliar</button>
+                </form>
+                </article>
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>
