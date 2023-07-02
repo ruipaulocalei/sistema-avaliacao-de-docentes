@@ -14,7 +14,7 @@
                     <tr class="text-left border border-black">
                         <td class="border-l border-black px-4">{{ $questao->pergunta }}</td>
                         <td class="border-l border-black
-                        px-4 py-2 space-x-2">
+                        px-4 py-2 space-x-2 flex">
                             <a class="bg-blue-800 py-2 px-3 uppercase
                     rounded-lg text-white text-xs font-bold"
                                 href="{{ route('questoes.edit', $questao->id) }}">Editar</a>
