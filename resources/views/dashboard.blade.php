@@ -13,13 +13,37 @@
                     <hr class="font-bold border border-black mb-3">
                     @if (count($docentes) > 0)
                         @foreach ($docentes as $docente)
-                            <div class="flex space-x-4">
-                                <h4>{{ $docente->name }} - </h4>
-                                <h5>Média:
-                                    <span class="font-bold">{{ round($docente->media) }} Pontos -
-                                       +
-                                    </span>
-                                </h5>
+                            <div class="flex justify-between border-b border-blue-400 py-1">
+                                <div class="flex space-x-4">
+                                    <h4 class="font-bold">{{ $docente->name }} - </h4>
+                                    <h5>Média:
+                                        <span class="font-bold">{{ round($docente->media) }} Pontos -
+                                            @php
+                                                $media = round($docente->media);
+                                                $mensagem = '';
+                                                if ($media >= 0 && $media <= 7) {
+                                                    $mensagem = 'Mau';
+                                                } elseif ($media >= 8 && $media <= 9) {
+                                                    $mensagem = 'Medíocre';
+                                                } elseif ($media >= 10 && $media <= 12) {
+                                                    $mensagem = 'Suficiente';
+                                                } elseif ($media >= 13 && $media <= 15) {
+                                                    $mensagem = 'Bom';
+                                                } elseif ($media >= 16 && $media <= 17) {
+                                                    $mensagem = 'Muito Bom';
+                                                } elseif ($media >= 18 && $media <= 20) {
+                                                    $mensagem = 'Excelente';
+                                                }
+                                            @endphp
+                                            {{ $mensagem }}
+                                        </span>
+                                    </h5>
+                                </div>
+                                <div>
+                                    <a class="uppercase font-semibold
+                                    bg-green-500 text-white px-2 py-1 rounded-md"
+                                        href="{{'/admin/docente/'. $docente->id }}">Ver Pdf</a>
+                                </div>
                             </div>
                         @endforeach
                         <div class="w-full lg:w-1/2 py-3 h-96">

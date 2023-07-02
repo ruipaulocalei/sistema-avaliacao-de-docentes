@@ -34,11 +34,16 @@ class DashboardController extends Controller
         } elseif (auth()->user()->hasRole('professor')) {
             $pontuacao = Resultado::where('docente_id', auth()->user()->id)->avg('pontuacao');
             $chefeDepartamento = ChefeDepartamento::where('docente_id', auth()->user()->id)->first();
-            $usersDepartamento = User::where('departamento_id',
-            $chefeDepartamento->departamento_id)->where('id','!=',
-            $chefeDepartamento->docente_id)->get();
+            $usersDepartamento = User::where(
+                'departamento_id',
+                $chefeDepartamento->departamento_id
+            )->where(
+                'id',
+                '!=',
+                $chefeDepartamento->docente_id
+            )->get();
             //dd(round($pontuacao));
-            return view('user_types.docente', compact('pontuacao','chefeDepartamento','usersDepartamento'));
+            return view('user_types.docente', compact('pontuacao', 'chefeDepartamento', 'usersDepartamento'));
         } elseif (auth()->user()->hasRole('admin')) {
             //$users = User::with('roles')->get();
             /*  $docentes = User::whereHas('roles', function ($q) {
@@ -133,5 +138,22 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ver(int $id)
+    {
+        $resultado = Resultado::where('docente_id', $id)->first();
+        $chefeDepartamento = ChefeDepartamento::where(
+            'departamento_id',
+            $resultado->docente->departamento_id
+        )->first();
+        if ($resultado) {
+            return view('user_types.dashboard.ver', [
+                'resultado' => $resultado,
+                'chefeDepartamento' => $chefeDepartamento->docente->name,
+            ]);
+        } else {
+            return redirect()->back()->with('message', 'Sem resultado com o código passado.');
+        }
     }
 }

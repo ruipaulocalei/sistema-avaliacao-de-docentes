@@ -60,7 +60,7 @@
                         </div>
                 </div>
 
-                <form action="{{ "/avaliar/$user->id" }}"
+                <form action="{{ "/admin/avaliar/$user->id" }}"
                     class="space-y-4 px-6 pb-3" method="POST">
                     @csrf
                     <input type="hidden" name="docente_id" value="{{ $user->id }}">

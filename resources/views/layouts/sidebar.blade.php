@@ -61,47 +61,54 @@
                         <a href="{{ route('chefe_departamentos.index') }}"
                             class="flex items-center w-full p-2 text-white transition
                              duration-75 rounded-lg pl-11 group hover:bg-gray-900
-                              dark:text-white dark:hover:bg-gray-700">Chefe de Departamentos</a>
+                              dark:text-white dark:hover:bg-gray-700">Chefe
+                            de Departamentos</a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="{{ route('questoes.index') }}"
-                    class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700">
-                    <svg aria-hidden="true"
-                        class="flex-shrink-0 w-6 h-6 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                            clip-rule="evenodd"></path>
+                    class="flex items-center p-2 text-white rounded-lg dark:text-white
+                     hover:bg-gray-900 dark:hover:bg-gray-700">
+                    <svg class="flex-shrink-0 w-5 h-6 text-white transition
+                    duration-75 dark:text-gray-400 group-hover:text-gray-900
+                     dark:group-hover:text-white"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                        <path
+                            d="M19 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1ZM2 6v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H2Zm11 3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8a1 1 0 0 1 2 0h2a1 1 0 0 1 2 0v1Z" />
                     </svg>
                     <span class="flex-1 ml-3 whitespace-nowrap">Questões</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('departamentos.index') }}"
-                    class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700">
-                    <svg aria-hidden="true"
-                        class="flex-shrink-0 w-6 h-6 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                            clip-rule="evenodd"></path>
+                    class="flex items-center p-2 text-white rounded-lg dark:text-white
+                     hover:bg-gray-900 dark:hover:bg-gray-700">
+                    <svg class="flex-shrink-0 w-5 h-6 text-white transition duration-75
+                     dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                        <path
+                            d="M15.045.007 9.31 0a1.965 1.965 0 0 0-1.4.585L.58 7.979a2 2 0 0 0 0 2.805l6.573 6.631a1.956 1.956 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 18 8.479v-5.5A2.972 2.972 0 0 0 15.045.007Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
                     </svg>
                     <span class="flex-1 ml-3 whitespace-nowrap">Departamentos</span>
                 </a>
             </li>
             <li>
-                <x-slot name="content">
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
 
-                        <x-dropdown-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                            {{ __('Sair') }}
-                        </x-dropdown-link>
-                    </form>
-                </x-slot>
+                    <a class="flex items-center p-2 text-white
+                    rounded-lg dark:text-white
+                    hover:bg-gray-900 dark:hover:bg-gray-700"
+                        href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                        <svg class="w-5 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
+                          </svg>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Sair</span>
+                    </a>
+                </form>
             </li>
         </ul>
     </div>
