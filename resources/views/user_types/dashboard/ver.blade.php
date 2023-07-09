@@ -14,7 +14,7 @@
 
         html,
         body {
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             font-size: 20px;
         }
 
@@ -39,6 +39,10 @@
             justify-content: space-between
         }
 
+        .justify-end {
+            justify-content: flex-end;
+        }
+
         .flex-col {
             flex-direction: column;
         }
@@ -49,6 +53,10 @@
 
         .text-center {
             text-align: center;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
         }
 
         .gap-2 {
@@ -72,6 +80,16 @@
         .mt-4 {
             margin-top: 1rem;
         }
+        .my-8 {
+            margin-top: 2rem/* 32px */;
+            margin-bottom: 2rem/* 32px */;
+        }
+        .border {
+            border: 1px solid #000;
+        }
+        .font-light {
+            font-weight: 100;
+        }
     </style>
 </head>
 
@@ -85,6 +103,30 @@
                 <h5>Instituto Politécnico da Huíla</h5>
             </div>
         </header>
+        <section class="flex justify-end my-8">
+            <div class="text-center">
+                <h5 class="font-semibold">Visto do Decano</h5>
+                <p>____________________________</p>
+                <h5 class="font-light">Rodrigues</h5>
+            </div>
+        </section>
+        <section>
+            <h4 class="text-center uppercase">Ficha de avaliação do docente</h4>
+            <div class="flex mt-4">
+                <h5 class="uppercase">1. No domínio do ensino</h5>
+                <span> (Informações do docente)</span>
+            </div>
+            <div class="mt-4">
+                <h5 class="uppercase">2. Pontuação/Classificação</h5>
+                <h5 class="font-light">16 Pontos - Muito Bom</h5>
+            </div>
+        </section>
+        <section class="border border-black text-center mt-4 space-y-2">
+            <h5>O Notado</h5>
+            <h6>Tomei conhecimento após homologação</h6>
+            <h6>Em ...../...../20....</h6>
+        </section>
+        <p class="text-center mt-4">__________________, aos _____ de ______________________ de 20____</p>
     </main>
     <br>
     <footer class="flex justify-between">

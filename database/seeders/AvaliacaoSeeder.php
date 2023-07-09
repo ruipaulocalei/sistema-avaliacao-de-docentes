@@ -175,16 +175,5 @@ class AvaliacaoSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-
-        DB::table('avaliacaos')->insert([
-            'pergunta' => "No decurso da aula o docente demonstra:
-             Perícia pedagógica em termos de princípios, objectivos,
-             conteúdos, métodos, e meios que utiliza?",
-            'resposta1' => "Sim",
-            'resposta2' => "Não",
-            'resposta_certa' => "Sim",
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
     }
 }

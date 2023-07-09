@@ -40,7 +40,7 @@
                                     </h5>
                                 </div>
                                 <div>
-                                    <a class="uppercase font-semibold
+                                    <a target="_blank" class="uppercase font-semibold
                                     bg-green-500 text-white px-2 py-1 rounded-md"
                                         href="{{'/admin/docente/'. $docente->id }}">Ver Pdf</a>
                                 </div>
