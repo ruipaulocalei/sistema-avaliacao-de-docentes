@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Avaliacao;
 use App\Models\Resultado;
-use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\ResultadoItem;
 
 class AvaliacaoController extends Controller
 {
@@ -86,31 +88,34 @@ class AvaliacaoController extends Controller
     public function destroy(Avaliacao $avaliacao)
     {
         //
-    }
+    } // Make sure to import the appropriate model.
 
     public function avaliar(Request $request)
     {
-        /* $validatedData = $request->validate([
-            '1' => 'required',
-            '2' => 'required',
-            // add more rules for other radio inputs here
-        ], [
-            '1.required' => 'Resposta para a pergunta 1 é obrigatória.',
-            '2.required' => 'Resposta para a pergunta 2 é obrigatória.',
-            // add more custom error messages for other radio inputs here
-        ]); */
-        //dd($validatedData);
-        $respostas = $request->all();
-        $docenteId = $respostas['docente_id'];
+        // Get all form data from the request.
+        $formData = $request->all();
+        $docenteId = $formData['docente_id'];
+        // Remove the CSRF token and the docente_id from the form data.
+        unset($formData['_token']);
         $valor = 0;
-        foreach ($respostas as $respostaId => $respostaUtilizador) {
-            if (is_numeric($respostaId)) {
-                //dd($respostaId);
-                $questoes = Avaliacao::where('id', $respostaId)->get();
-                $respostaCorrecta = $questoes[0]->resposta_certa;
-                if ($respostaCorrecta == $respostaUtilizador) {
-                    $valor++;
-                }
+        // Loop through the remaining form data and store it in the database.
+        foreach ($formData as $questaoId => $answer) {
+            $questao = Avaliacao::firstWhere('id', $questaoId);
+
+            // Make sure we have a valid $questao object.
+            if ($answer == 'Sim') {
+                $valor++;
+            }
+            if ($questao) {
+                // Access the 'pergunta' property directly from the $questao object.
+                $pergunta = $questao->pergunta;
+
+                // Store the data in the database using the ResultadoItem model.
+                ResultadoItem::create([
+                    'questao' => $pergunta,
+                    'resposta' => $answer,
+                    'docente_id' => $docenteId,
+                ]);
             }
         }
         Resultado::updateOrCreate([
@@ -119,7 +124,33 @@ class AvaliacaoController extends Controller
         ], [
             'pontuacao' => $valor,
         ]);
-        //dd($valor);
+        // Redirect or respond as needed after successful submission.
         return redirect()->route('dashboard');
     }
+
+
+    // public function avaliar(Request $request)
+    // {
+    //     $respostas = $request->all();
+    //     $docenteId = $respostas['docente_id'];
+    //     $valor = 0;
+    //     foreach ($respostas as $respostaId => $respostaUtilizador) {
+    //         if (is_numeric($respostaId)) {
+    //             //dd($respostaId);
+    //             $questoes = Avaliacao::where('id', $respostaId)->get();
+    //             $respostaCorrecta = $questoes[0]->resposta_certa;
+    //             if ($respostaCorrecta == $respostaUtilizador) {
+    //                 $valor++;
+    //             }
+    //         }
+    //     }
+    //     Resultado::updateOrCreate([
+    //         'estudante_id' => auth()->user()->id,
+    //         'docente_id' => $docenteId,
+    //     ], [
+    //         'pontuacao' => $valor,
+    //     ]);
+    //     //dd($valor);
+    //     return redirect()->route('dashboard');
+    // }
 }

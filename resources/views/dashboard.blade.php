@@ -42,7 +42,10 @@
                                 <div>
                                     <a class="uppercase font-semibold
                                     bg-green-500 text-white px-2 py-1 rounded-md"
-                                        href="{{'/admin/docente/'. $docente->id }}">Ver Pdf</a>
+                                        href="{{'/admin/docente/'. $docente->id.'/gerar' }}">Imprimir Pdf</a>
+                                    {{-- <a target="_blank" class="uppercase font-semibold
+                                    bg-green-500 text-white px-2 py-1 rounded-md"
+                                        href="{{'/admin/docente/'. $docente->id }}">Ver Pdf</a> --}}
                                 </div>
                             </div>
                         @endforeach

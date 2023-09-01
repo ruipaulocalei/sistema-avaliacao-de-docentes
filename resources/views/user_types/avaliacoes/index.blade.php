@@ -72,7 +72,7 @@
                                 <label for="">{{ $questao->resposta1 }}</label>
                             </div>
                             <div>
-                                <input type="radio" name="{{ $questao->id }}" value="Não" />
+                                <input type="radio" name="{{ $questao->id }}" value="Não" checked />
                                 <label for="">{{ $questao->resposta2 }}</label>
                             </div>
                         </fieldset>

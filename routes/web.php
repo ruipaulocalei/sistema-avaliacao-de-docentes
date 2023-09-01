@@ -30,6 +30,7 @@ Route::get('/', function () {
 Route::group(["middleware" => ["auth"]], function () {
     Route::get("/dashboard", [DashboardController::class, "index"])->name('dashboard');
     Route::get("/admin/docente/{id}", [DashboardController::class, "ver"])->name('dashboard.ver');
+    Route::get("/admin/docente/{id}/gerar", [DashboardController::class, "pdf"])->name('dashboard.pdf');
     Route::get("/admin/avaliar/{id}", [AvaliacaoController::class, "index"])->name('avaliar.index');
     Route::post("/admin/avaliar/{id}", [AvaliacaoController::class, "avaliar"])->name('avaliar.post');
     Route::resource("/admin/departamentos", DepartamentoController::class);

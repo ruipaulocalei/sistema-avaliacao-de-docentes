@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\ChefeDepartamento;
 use App\Models\Resultado;
+use App\Models\ResultadoItem;
 use App\Models\Tema;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -147,11 +150,36 @@ class DashboardController extends Controller
             'departamento_id',
             $resultado->docente->departamento_id
         )->first();
+
+        $resultadoItems = ResultadoItem::where('docente_id', $id)->get();
         if ($resultado) {
             return view('user_types.dashboard.ver', [
                 'resultado' => $resultado,
                 'chefeDepartamento' => $chefeDepartamento->docente->name,
+                'resultadoItems' => $resultadoItems,
             ]);
+        } else {
+            return redirect()->back()->with('message', 'Sem resultado com o código passado.');
+        }
+    }
+
+    public function pdf(int $id)
+    {
+        $resultado = Resultado::where('docente_id', $id)->first();
+        $chefeDepartamento = ChefeDepartamento::where(
+            'departamento_id',
+            $resultado->docente->departamento_id
+        )->first();
+
+        $resultadoItems = ResultadoItem::where('docente_id', $id)->get();
+        if ($resultado) {
+            $pdf= Pdf::loadView('user_types.dashboard.pdf', [
+                'resultado' => $resultado,
+                'chefeDepartamento' => $chefeDepartamento->docente->name,
+                'resultadoItems' => $resultadoItems,
+            ]);
+            $time = Carbon::now()->format('d-m-Y-H:i:s');
+            return $pdf->download('relatorio'.$id.'-'.$time.'.pdf');
         } else {
             return redirect()->back()->with('message', 'Sem resultado com o código passado.');
         }

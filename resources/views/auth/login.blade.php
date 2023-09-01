@@ -41,13 +41,20 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                @if (Route::has('register'))
+                {{-- @if (Route::has('register'))
                     <a class="underline text-sm text-white hover:text-indigo-600" href="{{ route('register') }}">
                         {{ __('Ainda não tens uma conta?') }}
                     </a>
-                @endif
+                @endif --}}
 
-                <x-button class="ml-3">
+                {{-- <button class="flex w-full items-center justify-center bg-gray-800
+                border border-transparent rounded-md
+                font-semibold text-xs text-white uppercase
+                tracking-widest hover:bg-gray-700 active:bg-gray-900
+                focus:outline-none focus:border-gray-900 focus:ring
+                ring-gray-300 disabled:opacity-25 text-center
+                transition ease-in-out duration-150">Entrar</button> --}}
+                <x-button>
                     {{ __('Log in') }}
                 </x-button>
             </div>

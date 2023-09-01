@@ -64,7 +64,7 @@
                                             <h6
                                                 class="text-center
                                              text-red-500 text-lg">
-                                                Já o avaliaste</h6>
+                                                Avaliado</h6>
                                         @endif
 
                                     </div>

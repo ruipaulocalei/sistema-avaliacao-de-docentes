@@ -103,20 +103,14 @@
                 <h6 style="margin-top: 16px;">Ficha de Avaliação do docente</h6>
             </div>
             <div
-             style="width: 100; background-color: aqua;
-              text-align: right; margin-top: 16px;">
-              <table>
-                <thead>
-                    <tr colspan='2'>
-                        <th style="width: 100%;"><h5>Visto do Decano</h5></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><h5>__________________________________________</h5></td>
-                    </tr>
-                </tbody>
-              </table>
+             style="display: flex; flex-direction: column;
+             justify-content: space-between;
+             align-items: flex-end; text-align: right; margin-top: 16px;">
+             <div></div>
+             <div>
+                <h5 style="margin-left: 50px;">Visto do Decano</h5>
+                <h5>__________________________________________</h5>
+             </div>
             </div>
         </header>
         <section class="mt-4">
@@ -147,7 +141,7 @@
     </main>
     <br>
     <footer style="display: grid; grid-column: 2; grid-gap: 10px;">
-        <table border='0' style="text-align: center;">
+        <table border='0'>
             <thead>
                 <tr>
                     <th>
@@ -161,11 +155,11 @@
             <tbody>
                 <tr>
                     <td>
-                        <p>_________________________________</p>
+                        <p>_______________________</p>
                         <h5>{{ $resultado->docente->name }}</h5>
                     </td>
                     <td>
-                        <p>__________________________________</p>
+                        <p>_______________________</p>
                         <h5>{{ $chefeDepartamento }}</h5>
                     </td>
                 </tr>
