@@ -96,7 +96,10 @@
     <main>
         <header class="flex justify-center
         flex-col items-center gap-2 mt-4">
-            <h4><img src="/images/IPHLogo.png" class="w-4 h-8" alt="Logo IPH"></h4>
+            <div style="text-align: center;">
+                <h4><img src="{{public_path('images/IPHLogo.png')}}"
+                    class="w-4 h-8" alt="Logo IPH"></h4>
+            </div>
             <div class="text-center space-y-2">
                 <h5>Universidade Mandume Ya Ndemufayo</h5>
                 <h5>Instituto Politécnico da Huíla</h5>
