@@ -15,6 +15,7 @@
         html,
         body {
             font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         .max-w-screen {
@@ -89,11 +90,26 @@
             --tw-text-opacity: 1;
             color: rgb(224 36 36 / var(--tw-text-opacity));
         }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 40px;
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 75%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
     </style>
 </head>
 
 <body class="mx-auto">
-    <main>
+    <main style="padding-left: 20px">
         <header class="flex justify-center
         flex-col items-center gap-2 mt-4">
             <div style="text-align: center;">
@@ -105,15 +121,11 @@
                 <h5>Instituto Politécnico da Huíla</h5>
                 <h6 style="margin-top: 16px;">Ficha de Avaliação do docente</h6>
             </div>
-            <div
-             style="display: flex; flex-direction: column;
-             justify-content: space-between;
-             align-items: flex-end; text-align: right; margin-top: 16px;">
-             <div></div>
-             <div>
-                <h5 style="margin-left: 50px;">Visto do Decano</h5>
-                <h5>__________________________________________</h5>
-             </div>
+            <div class="container">
+                <div class="content">
+                    <h5 style="margin-left: 50px;">Visto do Decano</h5>
+                    <h5>__________________________________________</h5>
+                 </div>
             </div>
         </header>
         <section class="mt-4">
@@ -144,24 +156,24 @@
     </main>
     <br>
     <footer style="display: grid; grid-column: 2; grid-gap: 10px;">
-        <table border='0'>
+        <table border='0' style="width: 100%;">
             <thead>
                 <tr>
-                    <th>
+                    <th style="width: 100%; text-align: center;">
                         <h5>O Docente</h5>
                     </th>
-                    <th>
+                    <th style="width: 100%; text-align: center;">
                         <h5>O Chefe de Departamento</h5>
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>
+                    <td style="width: 100%; text-align: center;">
                         <p>_______________________</p>
                         <h5>{{ $resultado->docente->name }}</h5>
                     </td>
-                    <td>
+                    <td style="width: 100%; text-align: center;">
                         <p>_______________________</p>
                         <h5>{{ $chefeDepartamento }}</h5>
                     </td>
