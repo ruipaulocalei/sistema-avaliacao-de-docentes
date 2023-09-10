@@ -70,13 +70,13 @@
                               dark:text-white dark:hover:bg-gray-700">Chefe
                             de Departamentos</a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('chefe_departamentos.index') }}"
                             class="flex items-center w-full p-2 text-white transition
                              duration-75 rounded-lg pl-11 group hover:bg-gray-900
                               dark:text-white dark:hover:bg-gray-700">Chefe
                             do R.H.</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </li>
             <li>
