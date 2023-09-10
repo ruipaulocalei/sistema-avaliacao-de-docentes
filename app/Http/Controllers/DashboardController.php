@@ -20,6 +20,36 @@ class DashboardController extends Controller
         return Resultado::where('estudante_id', $estudante_id)
             ->where('docente_id', $docente_id)->count();
     }
+
+    private function calculateAveragePontuacao()
+    {
+        return Resultado::where('docente_id', auth()->user()->id)->avg('pontuacao');
+    }
+
+    private function chefeDepartamentoExists()
+    {
+        return ChefeDepartamento::where('docente_id', auth()->user()->id)->exists();
+    }
+
+    private function getChefeDepartamento()
+    {
+        if ($this->chefeDepartamentoExists()) {
+            return ChefeDepartamento::where('docente_id', auth()->user()->id)->first();
+        }
+        return false;
+    }
+
+    private function getUsersInDepartment()
+    {
+        $chefeDepartamento = $this->getChefeDepartamento();
+        $user = auth()->user();
+        //dd($chefeDepartamento);
+        if ($this->getChefeDepartamento()) {
+            return User::where('departamento_id', $chefeDepartamento->departamento_id)
+                ->where('id', '!=', $user->id)
+                ->get();
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,18 +65,17 @@ class DashboardController extends Controller
             //dd($users);
             return view('user_types.estudante', compact('docentes'));
         } elseif (auth()->user()->hasRole('professor')) {
-            $pontuacao = Resultado::where('docente_id', auth()->user()->id)->avg('pontuacao');
-            $chefeDepartamento = ChefeDepartamento::where('docente_id', auth()->user()->id)->first();
-            $usersDepartamento = User::where(
-                'departamento_id',
-                $chefeDepartamento->departamento_id
-            )->where(
-                'id',
-                '!=',
-                $chefeDepartamento->docente_id
-            )->get();
-            //dd(round($pontuacao));
-            return view('user_types.docente', compact('pontuacao', 'chefeDepartamento', 'usersDepartamento'));
+            $pontuacao = $this->calculateAveragePontuacao();
+            $chefeDepartamento = $this->getChefeDepartamento();
+            $usersDepartamento = $this->getUsersInDepartment();
+            $isChefeDepartamento = $this->chefeDepartamentoExists();
+
+            return view('user_types.docente', compact(
+                'isChefeDepartamento',
+                'pontuacao',
+                'chefeDepartamento',
+                'usersDepartamento'
+            ));
         } elseif (auth()->user()->hasRole('admin')) {
             //$users = User::with('roles')->get();
             /*  $docentes = User::whereHas('roles', function ($q) {
@@ -173,13 +202,13 @@ class DashboardController extends Controller
 
         $resultadoItems = ResultadoItem::where('docente_id', $id)->get();
         if ($resultado) {
-            $pdf= Pdf::loadView('user_types.dashboard.pdf', [
+            $pdf = Pdf::loadView('user_types.dashboard.pdf', [
                 'resultado' => $resultado,
                 'chefeDepartamento' => $chefeDepartamento->docente->name,
                 'resultadoItems' => $resultadoItems,
             ]);
             $time = Carbon::now()->format('d-m-Y-H:i:s');
-            return $pdf->download('relatorio'.$id.'-'.$time.'.pdf');
+            return $pdf->download('relatorio' . $id . '-' . $time . '.pdf');
         } else {
             return redirect()->back()->with('message', 'Sem resultado com o código passado.');
         }

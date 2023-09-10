@@ -4,7 +4,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Painel de Controle do Docente') }}
+            @if ($isChefeDepartamento)
+                {{ __('Painel de Controle do Chefe de Departamento de '. $chefeDepartamento->departamento->nome) }}
+            @else
+                {{ __('Painel de Controle do Docente') }}
+            @endif
         </h2>
     </x-slot>
 
@@ -12,21 +16,21 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200 shadow-lg">
-                    @if ($chefeDepartamento->docente)
-                        <div
-                            class="flex justify-between mb-3
-                        border border-gray-400 rounded-md p-2">
-                            <h4 class="font-bold">{{ $chefeDepartamento->docente->name }}</h4>
-                            <h5>Chefe de Departamento de
-                                <span class="font-bold">{{ $chefeDepartamento->departamento->nome }}</span>
-                            </h5>
-                        </div>
+                    @if ($isChefeDepartamento)
                         <div>
+                            <div
+                        class="flex justify-between mb-3
+                    border border-gray-400 rounded-md p-2">
+                        <h4 class="font-bold">{{ $chefeDepartamento->docente->name }}</h4>
+                        <h5>Chefe do Departamento de
+                            <span class="font-bold">{{ $chefeDepartamento->departamento->nome }}</span>
+                        </h5>
+                    </div>
                             <h6 class="text-center text-xl font-bold">Professores
                                 do Departamento de {{ $chefeDepartamento->departamento->nome }}</h6>
                                 <hr class="border border-gray-300" />
-                                @if (count($usersDepartamento) > 0)
 
+                                @if (count($usersDepartamento) > 0)
                                 <div class="grid gap-4
                             md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
                                     @foreach ($usersDepartamento as $docente)
@@ -64,7 +68,7 @@
                                             @else
                                                 <h6
                                                     class="text-center
-                                                 text-red-500 text-lg">
+                                                text-red-500 text-lg">
                                                     Avaliado</h6>
                                             @endif
 
@@ -78,6 +82,7 @@
                             @endif
                         </div>
                     @else
+                        @if (!$isChefeDepartamento)
                         <h1 class="text-center uppercase font-bold">Minha pontuação</h1>
                         @if ($pontuacao)
                             <h6>Olá, professor <span class="font-bold">{{ auth()->user()->name }}.</span>
@@ -111,7 +116,8 @@
                             <h1 class="text-red-600 text-center">
                                 Sem Pontuação por enquanto.</h1>
                         @endif
-                    @endif
+                        @endif
+                    @endcan
 
                 </div>
 
